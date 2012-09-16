@@ -9,15 +9,22 @@ public:
         // Start typing your C/C++ solution below
         // DO NOT write int main() function
         sort(num.begin(), num.end());
-
-        vector<int>::iterator i, j, k;
+        int *vec;
+        vec = new int[num.size()];
+        vector<int>::const_iterator it;
+        int jj = 0;
+        for (it = num.begin(); it != num.end(); ++it, ++jj)
+        {
+            vec[jj] = (*it);
+        }
         int min_diff = 32000, sum;
         bool found = false;
-        for (i = num.begin(); i != num.end() && !found; ++i)
+        int *i, *j, *k;
+        for (i = &vec[0]; i != &vec[num.size()] - 2 && !found; ++i)
         {
-            //solve this
+            // should solve this using only std::vector
             j = i + 1;
-            k = &(*(num.end() - 1));
+            k = &vec[num.size() - 1];
             while (j != k)
             {
                 if ( (*i) + (*j) + (*k) == target)
@@ -50,6 +57,7 @@ public:
         }
         return sum;
     }
+        
 };
 
 int main()
