@@ -10,39 +10,46 @@ public:
         // DO NOT write int main() function
         sort(num.begin(), num.end());
 
-        int sum = num.at(0) + num.at(1) + num.at(2);
-        int min_diff =  sum - target;
-        if ( min_diff < 0 )
+        vector<int>::iterator i, j, k;
+        int min_diff = 32000, sum;
+        bool found = false;
+        for (i = num.begin(); i != num.end() && !found; ++i)
         {
-            min_diff = - min_diff;
-        }
-
-        vector<int>::iterator i, j;
-
-        for (i = num.begin(); i != num.end() && min_diff != 0; ++i)
-            for (j = i + 1; j != num.end(); ++j)
+            //solve this
+            j = i + 1;
+            k = &(*(num.end() - 1));
+            while (j != k)
             {
-                for (int val = 0; val < min_diff; ++val)
+                if ( (*i) + (*j) + (*k) == target)
                 {
-                    const int search1 = (val + target - (*i) - (*j));
-                    const int search2 = (-val + target - (*i) - (*j));
-                    if (binary_search(j + 1, num.end(), search1))
+                    sum = (*i) + (*j) + (*k);
+                    found = true;
+                    break;
+                    //solution found
+                } else if ( (*i) + (*j) + (*k) > target)
+                {
+                    int current_diff = (*i) + (*j) + (*k) - target;
+                    if (current_diff < min_diff)
                     {
-                        min_diff = val;
-                        sum = (*i) + (*j) + search1;
-                        break;
+                        min_diff = current_diff;
+                        sum = (*i) + (*j) + (*k);
                     }
-                    else if (binary_search(j + 1, num.end(), search2))
+                    k--;
+                }
+                else
+                {
+                    int current_diff = target - ((*i) + (*j) + (*k));
+                    if (current_diff < min_diff)
                     {
-                        min_diff = val;
-                        sum = (*i) + (*j) + search2;
-                        break;
+                        min_diff = current_diff;
+                        sum = (*i) + (*j) + (*k);
                     }
+                    j++;
                 }
             }
+        }
         return sum;
     }
-
 };
 
 int main()
@@ -51,10 +58,10 @@ int main()
     //    S = {-1 2 1 -4}, and target = 1.
     vector<int> S;
     S.push_back(1);
-    S.push_back(1);
-    S.push_back(1);
     S.push_back(0);
+    S.push_back(2);
+    //    S.push_back(0);
 
-    cout << sol->threeSumClosest(S,100);
+    cout << sol->threeSumClosest(S,0);
     return 0;
 }
