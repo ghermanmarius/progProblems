@@ -11,11 +11,13 @@ int main() {
 			message.push(currentChar);
 		}
 	}
+	
 	std::stack<char> temp;
 	while (message.size()) { 
 		temp.push(message.top());
 		message.pop();
 	}
+	
 	while (temp.size()) {
 		std::cout << temp.top();
 		temp.pop();
