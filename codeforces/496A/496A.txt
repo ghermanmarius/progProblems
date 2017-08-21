@@ -1,0 +1,11 @@
+Pentru orice sir de trepte din enunt, dificultatea e:
+
+diff_a = Max(a[1] - a[0], a[2] - a[1], ..., a[x+1] - a[x], ..., a[n - 1] - a[n-2])
+
+Asta inseamna ca putem gasi dificulatea oricarui sir in O(n).
+
+Putem sa calculam toata dificultatile posibile prin eliminarea cate unei trepte din sir in O(n^2).
+
+Si cum n < 100, O(n^2) intra sigur in timpul de 2 secude (intra pana la n = 100.000 un O(n^2) in 2 secunde)
+
+Asa ca bruteforce all the way.
