@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-int difficulty(std::vector<int> a) {
+int difficulty(const std::vector<int>& a) {
 	int diff = 0;
 	int maxDiff = 0;
 
@@ -32,12 +32,13 @@ int main()
 
 	int minDiff = 9999;
 	for (int i = 1; i < n - 1; ++i) {
-		std::vector<int> _a = a;
-		_a.erase(_a.begin() + i);
-		int diff = difficulty(_a);
+		int _save = a[i];
+		a.erase(a.begin() + i);
+		int diff = difficulty(a);
 		if (diff < minDiff) {
 			minDiff = diff;
 		}
+		a.insert(a.begin() + i, _save);
 	}
 
 	std::cout << minDiff;
