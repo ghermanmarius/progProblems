@@ -1,0 +1,24 @@
+//http://codeforces.com/contest/556/problem/A
+
+#include <iostream>
+#include <sstream>
+#include <algorithm>
+
+
+int main()
+{
+	long n;
+	char c;
+	long numZeros = 0;
+	long numOnes = 0;
+	std::cin >> n;
+	for (int i = 0; i < n; ++i) {
+		std::cin >> c;
+		numZeros += (c == '0') ? 1 : 0;
+		numOnes += (c == '1') ? 1 : 0;
+	}
+	long ans = (numZeros > numOnes) ? (numZeros - numOnes) : (numOnes - numZeros);
+	std::cout << ans;
+
+	return 0;
+}
