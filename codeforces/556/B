@@ -1,0 +1,41 @@
+//http://codeforces.com/contest/556/problem/B
+
+#include <iostream>
+#include <sstream>
+#include <algorithm>
+#include <vector>
+
+int main()
+{
+	long n;
+	long activeT;
+	std::cin >> n;
+	std::vector<int> gears;
+	for (int i = 0; i < n; ++i) {
+		std::cin >> activeT;
+		gears.push_back(activeT);
+	}
+	
+	int numPushes = gears.size() - gears[0];
+
+	bool result = true;
+	gears[0] = 0;
+
+	for (int i = 1; i < n && result; ++i) {
+		if (i % 2) {
+			gears[i] = (gears.size() + gears[i] - numPushes) % n;
+			if (gears[i] != i) {
+				result = false;
+			}
+		} else {
+			gears[i] = (gears[i] + numPushes) % n;
+			if (gears[i] != i) {
+				result = false;
+			}
+		}
+	}
+
+	std::cout << (result ? "Yes" : "No");
+	return 0;
+}
+
